@@ -1,6 +1,6 @@
 # Plague Call Online Character List
 
-[![Open Site](https://img.shields.io/badge/Open%20Site-GitHub%20Pages-2ea44f?style=for-the-badge)](https://xuysgorbi.github.io/Plague_call_online_character_list/)
+[![Open Site](https://img.shields.io/badge/Open%20Site-GitHub%20Pages-2ea44f?style=for-the-badge)](https://xuysgorbi.github.io/Plague_call_online_character_list.github.io/)
 
 Электронный лист персонажа.
 
@@ -11,7 +11,7 @@
 
 ## Открыть сайт
 
-[Открыть сайт](https://xuysgorbi.github.io/Plague_call_online_character_list/)
+[Открыть сайт](https://xuysgorbi.github.io/Plague_call_online_character_list.github.io/)
 
 ## Что это
 
