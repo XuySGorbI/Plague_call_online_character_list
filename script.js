@@ -178,7 +178,28 @@ function createTalentTrees() {
         syncAndPersist("Умение добавлено и сохранено.");
       });
 
-      talentRow.append(talentLabel, talentInput, addButton);
+      const removeButton = document.createElement("button");
+      removeButton.type = "button";
+      removeButton.className = "talent-tree__add talent-tree__remove";
+      removeButton.dataset.talentIndex = String(talentIndex);
+      removeButton.setAttribute("aria-label", `${label} ${talentIndex}: убрать умение`);
+      removeButton.textContent = "-";
+
+      removeButton.addEventListener("click", () => {
+        const countKey = `${prefix}_${talentIndex}_skillCount`;
+        const currentCount = Number.parseInt(String(state.fields[countKey] || "0"), 10) || 0;
+
+        if (currentCount <= 0) {
+          return;
+        }
+
+        const removedSkillKey = `${prefix}_${talentIndex}_skill_${currentCount}`;
+        state.fields[countKey] = String(currentCount - 1);
+        state.fields[removedSkillKey] = "";
+        syncAndPersist("Умение удалено и сохранено.");
+      });
+
+      talentRow.append(talentLabel, talentInput, removeButton, addButton);
 
       const skills = document.createElement("div");
       skills.className = "talent-tree__skills";
@@ -430,7 +451,8 @@ function syncTalentTrees() {
       );
       const visibleCount = talentValue ? Math.max(savedCount, filledCount) : 0;
       const clampedCount = Math.max(0, Math.min(skillCount, visibleCount));
-      const addButton = group.querySelector(".talent-tree__add");
+      const addButton = group.querySelector(".talent-tree__add:not(.talent-tree__remove)");
+      const removeButton = group.querySelector(".talent-tree__remove");
       const skillRows = [...group.querySelectorAll(".talent-tree__skill-row")];
 
       state.fields[countKey] = String(clampedCount);
@@ -439,6 +461,12 @@ function syncTalentTrees() {
         const canAdd = Boolean(talentValue) && clampedCount < skillCount;
         addButton.hidden = !canAdd;
         addButton.disabled = !canAdd;
+      }
+
+      if (removeButton) {
+        const canRemove = Boolean(talentValue) && clampedCount > 0;
+        removeButton.hidden = !canRemove;
+        removeButton.disabled = !canRemove;
       }
 
       group.classList.toggle("is-empty", !talentValue);

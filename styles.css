@@ -684,7 +684,7 @@ body[data-theme="dark"]::before {
 
 .talent-tree__talent-row {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) auto auto;
   align-items: end;
   gap: 0.55rem;
 }
