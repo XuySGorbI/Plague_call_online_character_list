@@ -663,8 +663,83 @@ body[data-theme="dark"]::before {
   text-align: center;
 }
 
+.line-list__input--compact {
+  font-size: clamp(0.92rem, 1vw, 1.02rem);
+}
+
 .line-list--tight .line-list__input {
   font-size: clamp(0.9rem, 1vw, 1.04rem);
+}
+
+.talent-tree {
+  display: grid;
+  gap: 0.9rem;
+  width: 100%;
+}
+
+.talent-tree__group {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.talent-tree__talent-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 0.55rem;
+}
+
+.talent-tree__group.is-empty .talent-tree__skills {
+  display: none;
+}
+
+.talent-tree__add {
+  appearance: none;
+  width: 1.55rem;
+  height: 1.55rem;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--line) 55%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--paper) 86%, transparent);
+  color: var(--ink);
+  font: inherit;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform 140ms ease, border-color 140ms ease, background-color 140ms ease, opacity 140ms ease;
+}
+
+.talent-tree__add:hover,
+.talent-tree__add:focus-visible {
+  outline: none;
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--accent) 70%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, var(--paper));
+}
+
+.talent-tree__add[hidden] {
+  display: none;
+}
+
+.talent-tree__skills {
+  display: grid;
+  gap: 0.42rem;
+  padding-left: 1rem;
+}
+
+.talent-tree__skill-row {
+  display: grid;
+  grid-template-columns: 0.7rem minmax(0, 1fr);
+  align-items: end;
+  gap: 0.45rem;
+}
+
+.talent-tree__skill-mark {
+  color: var(--ink-soft);
+  font-family: "Book Antiqua", "Palatino Linotype", serif;
+  font-size: 0.95rem;
+  line-height: 1;
+  text-align: center;
+  transform: translateY(-0.1rem);
 }
 
 .stacked-card {

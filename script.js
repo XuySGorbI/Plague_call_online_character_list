@@ -133,11 +133,95 @@ function createLineLists() {
 
 createLineLists();
 
+function createTalentTrees() {
+  const containers = [...document.querySelectorAll("[data-talent-tree]")];
+
+  containers.forEach((container) => {
+    const prefix = container.dataset.prefix || "talent";
+    const count = Number(container.dataset.count || 0);
+    const skillCount = Number(container.dataset.skillCount || 0);
+    const label = container.dataset.label || "Талант";
+
+    container.innerHTML = "";
+
+    for (let talentIndex = 1; talentIndex <= count; talentIndex += 1) {
+      const group = document.createElement("section");
+      group.className = "talent-tree__group";
+      group.dataset.talentIndex = String(talentIndex);
+
+      const talentRow = document.createElement("div");
+      talentRow.className = "talent-tree__talent-row";
+
+      const talentLabel = document.createElement("span");
+      talentLabel.className = "sr-only";
+      talentLabel.textContent = `${label} ${talentIndex}`;
+
+      const talentInput = document.createElement("input");
+      talentInput.type = "text";
+      talentInput.className = "line-list__input talent-tree__input";
+      talentInput.dataset.field = `${prefix}_${talentIndex}`;
+      talentInput.setAttribute("aria-label", `${label} ${talentIndex}`);
+
+      const addButton = document.createElement("button");
+      addButton.type = "button";
+      addButton.className = "talent-tree__add";
+      addButton.dataset.talentIndex = String(talentIndex);
+      addButton.setAttribute("aria-label", `${label} ${talentIndex}: добавить умение`);
+      addButton.textContent = "+";
+
+      addButton.addEventListener("click", () => {
+        const countKey = `${prefix}_${talentIndex}_skillCount`;
+        const currentCount = Number.parseInt(String(state.fields[countKey] || "0"), 10) || 0;
+        const nextCount = Math.min(skillCount, currentCount + 1);
+
+        state.fields[countKey] = String(nextCount);
+        syncAndPersist("Умение добавлено и сохранено.");
+      });
+
+      talentRow.append(talentLabel, talentInput, addButton);
+
+      const skills = document.createElement("div");
+      skills.className = "talent-tree__skills";
+
+      for (let skillIndex = 1; skillIndex <= skillCount; skillIndex += 1) {
+        const skillRow = document.createElement("div");
+        skillRow.className = "talent-tree__skill-row";
+        skillRow.dataset.skillIndex = String(skillIndex);
+        skillRow.hidden = true;
+
+        const skillMark = document.createElement("span");
+        skillMark.className = "talent-tree__skill-mark";
+        skillMark.textContent = ">";
+        skillMark.setAttribute("aria-hidden", "true");
+
+        const skillLabel = document.createElement("span");
+        skillLabel.className = "sr-only";
+        skillLabel.textContent = `${label} ${talentIndex}, умение ${skillIndex}`;
+
+        const skillInput = document.createElement("input");
+        skillInput.type = "text";
+        skillInput.className = "line-list__input line-list__input--compact talent-tree__skill-input";
+        skillInput.dataset.field = `${prefix}_${talentIndex}_skill_${skillIndex}`;
+        skillInput.setAttribute("aria-label", `${label} ${talentIndex}, умение ${skillIndex}`);
+
+        skillRow.append(skillMark, skillLabel, skillInput);
+        skills.append(skillRow);
+      }
+
+      group.append(talentRow, skills);
+      container.append(group);
+    }
+  });
+}
+
+createTalentTrees();
+
 const fieldElements = [...document.querySelectorAll("[data-field]")];
 const trackElements = [...document.querySelectorAll("[data-track]")];
 const dynamicTrackElements = trackElements.filter((trackElement) => trackElement.dataset.trackLimitField);
 const thresholdLists = [...document.querySelectorAll("[data-threshold-field]")];
 const dynamicLineLists = [...document.querySelectorAll("[data-dynamic-limit-field]")];
+const talentTreeContainers = [...document.querySelectorAll("[data-talent-tree]")];
 const saveStatus = document.getElementById("save-status");
 const resetButton = document.getElementById("reset-sheet");
 const themeToggleButton = document.getElementById("theme-toggle");
@@ -238,6 +322,7 @@ function syncUiState() {
     ["threshold lists", syncThresholdLists],
     ["dynamic lists", syncDynamicLineLists],
     ["dynamic tracks", syncDynamicTracks],
+    ["talent tree", syncTalentTrees],
     ["durability tones", syncDurabilityFields],
     ["resource transfer", syncResourceTransfers],
     ["resource controls", syncResourceControlStates],
@@ -318,6 +403,50 @@ function syncDynamicTracks() {
         button.classList.remove("is-active");
         button.setAttribute("aria-pressed", "false");
       }
+    });
+  });
+}
+
+function syncTalentTrees() {
+  talentTreeContainers.forEach((container) => {
+    const prefix = container.dataset.prefix || "talent";
+    const skillCount = Number(container.dataset.skillCount || 0);
+    const groups = [...container.querySelectorAll(".talent-tree__group")];
+
+    groups.forEach((group) => {
+      const talentIndex = group.dataset.talentIndex;
+      const talentFieldKey = `${prefix}_${talentIndex}`;
+      const countKey = `${prefix}_${talentIndex}_skillCount`;
+      const talentValue = String(
+        state.fields[talentFieldKey] ?? group.querySelector(`[data-field="${talentFieldKey}"]`)?.value ?? "",
+      ).trim();
+      const savedCount = Number.parseInt(String(state.fields[countKey] || "0"), 10) || 0;
+      const filledCount = Math.max(
+        0,
+        ...Array.from({ length: skillCount }, (_, skillOffset) => {
+          const skillFieldKey = `${prefix}_${talentIndex}_skill_${skillOffset + 1}`;
+          return String(state.fields[skillFieldKey] || "").trim() ? skillOffset + 1 : 0;
+        }),
+      );
+      const visibleCount = talentValue ? Math.max(savedCount, filledCount) : 0;
+      const clampedCount = Math.max(0, Math.min(skillCount, visibleCount));
+      const addButton = group.querySelector(".talent-tree__add");
+      const skillRows = [...group.querySelectorAll(".talent-tree__skill-row")];
+
+      state.fields[countKey] = String(clampedCount);
+
+      if (addButton) {
+        const canAdd = Boolean(talentValue) && clampedCount < skillCount;
+        addButton.hidden = !canAdd;
+        addButton.disabled = !canAdd;
+      }
+
+      group.classList.toggle("is-empty", !talentValue);
+
+      skillRows.forEach((row, skillOffset) => {
+        const isVisible = Boolean(talentValue) && skillOffset < clampedCount;
+        row.hidden = !isVisible;
+      });
     });
   });
 }
