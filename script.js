@@ -453,6 +453,12 @@ function syncTransferButtons() {
 
   transferButtons.forEach((button) => {
     const stateKey = button.dataset.transferStateKey;
+    if (!stateKey) {
+      button.classList.remove("is-active");
+      button.setAttribute("aria-pressed", "false");
+      return;
+    }
+
     const isActive = Boolean(state.fields[stateKey]);
     button.classList.toggle("is-active", isActive);
     button.setAttribute("aria-pressed", String(isActive));
@@ -466,6 +472,10 @@ function getTransferredEquipmentItems() {
   transferButtons.forEach((button) => {
     const stateKey = button.dataset.transferStateKey;
     const sourceField = button.dataset.transferSourceField;
+    if (!stateKey || !sourceField) {
+      return;
+    }
+
     const isActive = Boolean(state.fields[stateKey]);
     const text = String(
       state.fields[sourceField] ?? document.querySelector(`[data-field="${sourceField}"]`)?.value ?? "",
