@@ -733,6 +733,10 @@ body[data-theme="dark"]::before {
   gap: 0.45rem;
 }
 
+.talent-tree__skill-row[hidden] {
+  display: none;
+}
+
 .talent-tree__skill-mark {
   color: var(--ink-soft);
   font-family: "Book Antiqua", "Palatino Linotype", serif;
