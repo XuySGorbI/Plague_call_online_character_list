@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Таблицы для заполнения листа</title>
+    <link rel="stylesheet" href="styles.css?v=20260407-18" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="topbar no-print">
+        <div class="topbar__text">
+          <p class="eyebrow">Табличная памятка</p>
+          <h1>Таблицы для заполнения листа</h1>
+          <p class="helper">
+            Собранные рядом таблицы и заготовки по мотивам раздела книги со стр. 78-106.
+            Это удобная рабочая версия для листа, а не официальная замена книге.
+          </p>
+        </div>
+        <div class="topbar__actions">
+          <a class="action-button" href="index.html">К листу</a>
+          <a class="action-button" href="guide.html">Памятка</a>
+          <button type="button" class="action-button" id="tables-theme-toggle" aria-pressed="false">
+            Тёмная тема
+          </button>
+        </div>
+      </section>
+
+      <section class="status-card no-print">
+        Это примерный набор таблиц. Свои варианты тоже можно создавать, но лучше сначала согласовать их с мастером.
+      </section>
+
+      <article class="sheet-page guide-page">
+        <section class="guide-grid">
+          <section class="sheet-card guide-card guide-card--wide">
+            <h2>Возрастная таблица</h2>
+            <p class="guide-note">
+              Это самая явная таблица из нужного диапазона страниц. Её удобно держать под рукой при создании персонажа.
+            </p>
+            <div class="guide-table-wrap">
+              <table class="guide-table">
+                <thead>
+                  <tr>
+                    <th>Возраст</th>
+                    <th>Базовое значение</th>
+                    <th>Шаг</th>
+                    <th>Предел</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>15-19</td><td>19</td><td>0</td><td>2</td></tr>
+                  <tr><td>20-24</td><td>18</td><td>1</td><td>4</td></tr>
+                  <tr><td>25-29</td><td>17</td><td>2</td><td>4</td></tr>
+                  <tr><td>30-34</td><td>16</td><td>3</td><td>6</td></tr>
+                  <tr><td>35-39</td><td>15</td><td>4</td><td>6</td></tr>
+                  <tr><td>40-44</td><td>14</td><td>5</td><td>8</td></tr>
+                  <tr><td>45-49</td><td>13</td><td>6</td><td>8</td></tr>
+                  <tr><td>50-54</td><td>12</td><td>7</td><td>10</td></tr>
+                  <tr><td>55-59</td><td>11</td><td>8</td><td>10</td></tr>
+                  <tr><td>60-64</td><td>10</td><td>9</td><td>12</td></tr>
+                  <tr><td>65-69</td><td>9</td><td>10</td><td>12</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="sheet-card guide-card">
+            <h2>Образ персонажа</h2>
+            <p class="guide-note">
+              Ниже примерные таблицы по мотивам блока с образами и генераторами персонажа. Их можно использовать как быстрые бросковые подсказки.
+            </p>
+            <div class="guide-table-wrap">
+              <table class="guide-table">
+                <thead>
+                  <tr>
+                    <th>d6</th>
+                    <th>Внешняя черта</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>1</td><td>Замотан в старые бинты или ткань</td></tr>
+                  <tr><td>2</td><td>Носит заметный знак ремесла или службы</td></tr>
+                  <tr><td>3</td><td>Всегда выглядит уставшим и недоспавшим</td></tr>
+                  <tr><td>4</td><td>Слишком аккуратен для окружающей обстановки</td></tr>
+                  <tr><td>5</td><td>Пахнет лекарствами, гарью или сыростью</td></tr>
+                  <tr><td>6</td><td>Есть заметный шрам, ожог или след болезни</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="sheet-card guide-card">
+            <h2>Прошлое и привычка</h2>
+            <div class="guide-table-wrap">
+              <table class="guide-table">
+                <thead>
+                  <tr>
+                    <th>d6</th>
+                    <th>Прошлое</th>
+                    <th>Привычка</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>1</td><td>Бывший служака</td><td>Всегда проверяет выходы</td></tr>
+                  <tr><td>2</td><td>Лекарь или ученик лекаря</td><td>Пересчитывает запасы вслух</td></tr>
+                  <tr><td>3</td><td>Торговец или меняла</td><td>Сразу оценивает ценность вещей</td></tr>
+                  <tr><td>4</td><td>Охотник или следопыт</td><td>Говорит коротко и по делу</td></tr>
+                  <tr><td>5</td><td>Ремесленник</td><td>Постоянно чинит мелочи на ходу</td></tr>
+                  <tr><td>6</td><td>Бродяга или беглец</td><td>Никогда не садится спиной к двери</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="sheet-card guide-card guide-card--wide">
+            <h2>Осложнения и зацепки</h2>
+            <div class="guide-columns">
+              <div>
+                <div class="guide-table-wrap">
+                  <table class="guide-table">
+                    <thead>
+                      <tr>
+                        <th>d6</th>
+                        <th>Осложнение</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>1</td><td>Старый долг внезапно напомнил о себе</td></tr>
+                      <tr><td>2</td><td>Враг знает, где искать персонажа</td></tr>
+                      <tr><td>3</td><td>Болезнь или слабость снова даёт о себе знать</td></tr>
+                      <tr><td>4</td><td>Нужный ресурс заканчивается в самый плохой момент</td></tr>
+                      <tr><td>5</td><td>Союзник требует плату за помощь</td></tr>
+                      <tr><td>6</td><td>Случайная находка привлекает лишнее внимание</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div>
+                <div class="guide-table-wrap">
+                  <table class="guide-table">
+                    <thead>
+                      <tr>
+                        <th>d6</th>
+                        <th>Зацепка для цели</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>1</td><td>Нужно найти человека раньше врага</td></tr>
+                      <tr><td>2</td><td>Есть слух о лекарстве, но цена неизвестна</td></tr>
+                      <tr><td>3</td><td>Группа нуждается в редком ресурсе</td></tr>
+                      <tr><td>4</td><td>Есть шанс отомстить или закрыть старый счёт</td></tr>
+                      <tr><td>5</td><td>Появился способ укрепить отряд</td></tr>
+                      <tr><td>6</td><td>Открылась дорога в опасное, но ценное место</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="sheet-card guide-card guide-card--wide">
+            <h2>Как этим пользоваться</h2>
+            <ul class="guide-list">
+              <li>Если мастер использует свои таблицы, ориентируйся в первую очередь на них.</li>
+              <li>Если таблица даёт вдохновение, а не точный ответ, просто возьми идею и запиши её в лист свободным текстом.</li>
+              <li>Если хочешь добавить собственные строки или целую новую таблицу, это нормально, но лучше сначала спросить мастера.</li>
+              <li>Таблицы нужны как ускоритель создания персонажа, а не как ограничение для образа.</li>
+            </ul>
+          </section>
+        </section>
+      </article>
+    </main>
+
+    <script>
+      const THEME_KEY = "mama1-theme";
+      const themeToggle = document.getElementById("tables-theme-toggle");
+      const savedTheme = localStorage.getItem(THEME_KEY) || "light";
+
+      document.body.dataset.theme = savedTheme;
+      themeToggle.setAttribute("aria-pressed", String(savedTheme === "dark"));
+      themeToggle.textContent = savedTheme === "dark" ? "Светлая тема" : "Тёмная тема";
+
+      themeToggle.addEventListener("click", () => {
+        const nextTheme = document.body.dataset.theme === "dark" ? "light" : "dark";
+        document.body.dataset.theme = nextTheme;
+        localStorage.setItem(THEME_KEY, nextTheme);
+        themeToggle.setAttribute("aria-pressed", String(nextTheme === "dark"));
+        themeToggle.textContent = nextTheme === "dark" ? "Светлая тема" : "Тёмная тема";
+      });
+    </script>
+  </body>
+</html>

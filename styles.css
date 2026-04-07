@@ -265,6 +265,44 @@ body[data-theme="dark"]::before {
   gap: 24px;
 }
 
+.guide-note {
+  margin: 0;
+  color: var(--ink-soft);
+  line-height: 1.45;
+}
+
+.guide-table-wrap {
+  overflow-x: auto;
+  border-radius: 14px;
+  border: 1px solid var(--line-soft);
+  background: color-mix(in srgb, var(--paper) 86%, transparent);
+}
+
+.guide-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 420px;
+}
+
+.guide-table th,
+.guide-table td {
+  padding: 0.82rem 0.9rem;
+  border-bottom: 1px solid var(--line-soft);
+  text-align: left;
+  vertical-align: top;
+}
+
+.guide-table th {
+  font-family: "Book Antiqua", "Palatino Linotype", serif;
+  font-size: 1rem;
+  font-weight: 700;
+  background: color-mix(in srgb, var(--glass) 82%, transparent);
+}
+
+.guide-table tr:last-child td {
+  border-bottom: 0;
+}
+
 .identity-card {
   padding-top: 32px;
 }
